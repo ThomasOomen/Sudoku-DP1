@@ -1,0 +1,18 @@
+﻿<Window x:Class="Sudoku_Tim_Thomas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sudoku_Tim_Thomas"
+        mc:Ignorable="d"
+        Title="Sudoku Tim Thomas" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Canvas Background="Transparent">
+      
+        <StackPanel>
+            <Button Command="{Binding ExecuteHelpers}" CommandParameter="LoadSudoku" Content="Open Sudoku"></Button>
+            <Button Command="{Binding ExecuteHelpers}" CommandParameter="ValidateSudoku" Content="Validate Sudoku"/>
+            <Button Command="{Binding ExecuteHelpers}" CommandParameter="SolveSudoku" Content="Solve Sudoku"/>
+        </StackPanel>
+    </Canvas>
+</Window>
