@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FactoryPattern\AbstractFactory.cs" />
+    <Compile Include="FactoryPattern\DefaultSudokuFactory.cs" />
+    <Compile Include="FactoryPattern\IAbstractFactory.cs" />
+    <Compile Include="FactoryPattern\NonDefaultSudokuFactory.cs" />
     <Compile Include="Helpers\IHelperBase.cs" />
     <Compile Include="Helpers\ModifyState.cs" />
     <Compile Include="Helpers\OpenSudoku.cs" />
@@ -92,8 +96,11 @@
     <Compile Include="StatePattern\HelperState.cs" />
     <Compile Include="StatePattern\Manager.cs" />
     <Compile Include="StatePattern\State.cs" />
+    <Compile Include="SudokuBuilder\BuildSudokuBoard.cs" />
     <Compile Include="SudokuBuilder\ISudokuCloner.cs" />
+    <Compile Include="SudokuBuilder\JigsawSudokuBuilder.cs" />
     <Compile Include="SudokuBuilder\NormalSudokuBuilder.cs" />
+    <Compile Include="SudokuBuilder\SamuraiSudokuBuilder.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="VisitorPattern\IVisitor.cs" />
@@ -137,8 +144,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FactoryPattern\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

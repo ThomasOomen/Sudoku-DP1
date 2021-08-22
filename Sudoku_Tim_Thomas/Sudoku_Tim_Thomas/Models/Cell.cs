@@ -10,7 +10,7 @@ namespace Sudoku_Tim_Thomas.Models
 {
     public class Cell : IGridPart
     {
-        public Cell(int value, int maxValue, int cell_x_row, int cell_y_column)
+        public Cell(int value, int maxValue, int cell_x_row, int cell_y_column, string color)
         {
             cellValue = value;
             cellMaxValue = maxValue;

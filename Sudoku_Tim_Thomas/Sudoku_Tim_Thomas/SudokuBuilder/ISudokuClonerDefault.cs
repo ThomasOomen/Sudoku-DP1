@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Sudoku_Tim_Thomas.SudokuBuilder
 {
-    public interface ISudokuCloner
+    public interface ISudokuClonerDefault
     {
-        //TODO Idk waarom dit nodig is, moet nog even kijken of het nodig is, als niet nodig is weghalen. 
-        ISudokuCloner Clone();
+        ISudokuClonerDefault Clone();
 
         SudokuBase Build(string file);
+
     }
 }

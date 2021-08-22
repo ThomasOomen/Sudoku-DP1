@@ -13,7 +13,8 @@ namespace Sudoku_Tim_Thomas.Helpers
     class OpenSudoku : IHelperBase
     {
         private MainViewModel _mainVM;
-
+        string curDirectory;
+        OpenFileDialog openFileDialog;
         private string _fileName;
 
         public OpenSudoku(MainViewModel mainVM)
@@ -23,8 +24,8 @@ namespace Sudoku_Tim_Thomas.Helpers
 
         public void Execute()
         {
-            string curDirectory = Environment.CurrentDirectory;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            curDirectory = Environment.CurrentDirectory;
+            openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Directory.GetParent(curDirectory).Parent.FullName + "\\Files";
 
             if(openFileDialog.ShowDialog()== true)
@@ -37,7 +38,6 @@ namespace Sudoku_Tim_Thomas.Helpers
                         //TODO Add default factory
                         //TODO Add default builder
                         //TODO give default builder source
-
                         break;
 
                     case string six when _fileName.Contains("6x6"):
@@ -69,7 +69,7 @@ namespace Sudoku_Tim_Thomas.Helpers
 
         private void InitDefaultSudoku()
         {
-
+            DefaultSudokuFactory defaultSudokuFactory = 
         }
 
         private void InitNonDefaultSudoku()
