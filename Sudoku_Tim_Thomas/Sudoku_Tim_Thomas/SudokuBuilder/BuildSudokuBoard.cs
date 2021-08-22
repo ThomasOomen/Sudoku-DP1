@@ -37,7 +37,7 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
                     gridInfo.Add("currXRow", -1);
                     gridInfo.Add("sudokuXRow", -1);
                     gridInfo.Add("sudokuYColumn", 0);
-                    gridInfo.Add("boardRegNr", -1);
+                    gridInfo.Add("boardRegNr", 0);
                     break;
 
                 case "jigsaw":

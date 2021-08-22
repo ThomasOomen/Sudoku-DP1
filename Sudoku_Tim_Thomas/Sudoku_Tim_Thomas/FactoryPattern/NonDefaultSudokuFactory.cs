@@ -27,7 +27,7 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
         public ISudokuClonerNonDefault TypeBuilder(string sudokuType)
         {
             ISudokuClonerNonDefault sudokuClonerNonDefault = Types[sudokuType];
-            return (ISudokuClonerNonDefault)sudokuClonerNonDefault.Clone();
+            return sudokuClonerNonDefault.Clone();
         }
 
         public void FindType()
@@ -45,7 +45,8 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
                     }
                     else
                     {
-                        SaveType(fieldInfo.GetValue(null).ToString(), (ISudokuClonerNonDefault)Activator.CreateInstance(type));
+                        SaveType(fieldInfo.GetValue(null).ToString(), 
+                        (ISudokuClonerNonDefault)Activator.CreateInstance(type));
                     }
                 }
             }
@@ -53,7 +54,9 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
 
         public void SaveType(string type, ISudokuClonerNonDefault obj)
         {
+            Console.WriteLine("obj: ", obj);
             Types[type] = obj;
+            Console.WriteLine("type: ", Types);
         }
     }
 }

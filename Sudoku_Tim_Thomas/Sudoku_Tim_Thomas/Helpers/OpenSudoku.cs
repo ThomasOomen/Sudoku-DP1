@@ -31,52 +31,37 @@ namespace Sudoku_Tim_Thomas.Helpers
             curDirectory = Environment.CurrentDirectory;
             openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Directory.GetParent(curDirectory).Parent.FullName + "\\Files";
-
-            if(openFileDialog.ShowDialog()== true)
+            if (openFileDialog.ShowDialog()== true)
             {
-                
-                _fileName = openFileDialog.FileName;
-                switch (_fileName)
+                SudokuBase sudokuBase;
+                if(openFileDialog.FileName.Contains("4x4") || openFileDialog.FileName.Contains("6x6")  || openFileDialog.FileName.Contains("9x9"))
                 {
-                    case string four when _fileName.Contains("4x4"):
-                        InitDefaultSudoku(four);
-                        break;
-
-                    case string six when _fileName.Contains("6x6"):
-                        InitDefaultSudoku(six);
-
-                        break;
-
-                    case string nine when _fileName.Contains("9x9"):
-                        InitDefaultSudoku(nine);
-
-                        break;
-
-                    case string jigsaw when _fileName.Contains("jigsaw"):
-                        InitNonDefaultSudoku(jigsaw);
-                        break;
-
-                    case string samurai when _fileName.Contains("samurai"):
-                        InitNonDefaultSudoku(samurai);
-                        break;
+                    sudokuBase = InitDefaultSudoku(openFileDialog.FileName);
                 }
+                else
+                {
+                    Console.WriteLine(openFileDialog.FileName);
+                    sudokuBase = InitNonDefaultSudoku(openFileDialog.FileName);
+                }
+                
+                _mainVM.Sudoku = new SudokuViewModel(sudokuBase);
+
             }
         }
 
-        private void InitDefaultSudoku(string sudokuType)
+        private SudokuBase InitDefaultSudoku(string sudokuType)
         {
+
             DefaultSudokuFactory defaultSudokuFactory = (DefaultSudokuFactory)_mainFactory.TypeBuilder("Default");
-            ISudokuClonerDefault sudokuClonerDefault = defaultSudokuFactory.TypeBuilder("Default");
-            SudokuBase sudoku1;
-            sudoku1 = sudokuClonerDefault.Build(sudokuType);
+            ISudokuClonerDefault sudokuClonerDefault = defaultSudokuFactory.TypeBuilder("NormalSudoku");
+            return sudokuClonerDefault.Build(sudokuType);
         }
 
-        private void InitNonDefaultSudoku(string sudokuType)
+        private SudokuBase InitNonDefaultSudoku(string sudokuType)
         {
             NonDefaultSudokuFactory nonDefaultSudokuFactory = (NonDefaultSudokuFactory)_mainFactory.TypeBuilder("NonDefault");
             ISudokuClonerNonDefault sudokuClonerNonDefault = nonDefaultSudokuFactory.TypeBuilder("NonDefault");
-            SudokuBase sudoku2;
-            sudoku2 = sudokuClonerNonDefault.Build(sudokuType);
+            return sudokuClonerNonDefault.Build(sudokuType);
         }
     }
 }

@@ -8,11 +8,59 @@
         Title="Sudoku Tim Thomas" Height="450" Width="800"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Canvas Background="Transparent">
-      
+        <ItemsControl ItemsSource="{Binding Sudoku.SudokuGrids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding XRow}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding YColumn}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding Grids, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Cells, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <Canvas/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="ContentPresenter">
+                                            <Setter Property="Canvas.Left" Value="{Binding XRow}"/>
+                                            <Setter Property="Canvas.Top" Value="{Binding YColumn}"/>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Canvas>
+                                                <TextBox Foreground="black" Background="transparent" Width="{Binding Size}" Height="{Binding Size}" Text="{Binding cellValue}" FontSize="12"/>
+                                                <Rectangle Width="{Binding Size}" Height="{Binding Size}" Stroke="{Binding CellColor}">
+                                                </Rectangle>
+                                            </Canvas>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <StackPanel>
-            <Button Command="{Binding ExecuteHelpers}" CommandParameter="LoadSudoku" Content="Open Sudoku"></Button>
-            <Button Command="{Binding ExecuteHelpers}" CommandParameter="ValidateSudoku" Content="Validate Sudoku"/>
-            <Button Command="{Binding ExecuteHelpers}" CommandParameter="SolveSudoku" Content="Solve Sudoku"/>
+            <Button Command="{Binding ExecuteHelpers}" CommandParameter="LoadSudoku" Content="Selecteer sudoku"></Button>
+            <Button Command="{Binding ExecuteHelpers}" CommandParameter="ValidateSudoku" Content="Valideer sudoku" Click="Button_Click"/>
         </StackPanel>
     </Canvas>
 </Window>

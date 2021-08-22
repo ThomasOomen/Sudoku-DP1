@@ -45,6 +45,7 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
 
         public AbstractFactory TypeBuilder(string sudokuType)
         {
+            Console.WriteLine("voor error sudokuType: ", sudokuType);
             AbstractFactory sudokuClonerDefault = Types[sudokuType];
             return (AbstractFactory)sudokuClonerDefault.Clone();
         }

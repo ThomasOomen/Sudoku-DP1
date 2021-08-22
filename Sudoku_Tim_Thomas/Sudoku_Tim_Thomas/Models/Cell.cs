@@ -24,8 +24,9 @@ namespace Sudoku_Tim_Thomas.Models
         public int cellValue { get; set; }
         public int cellMaxValue { get; set; }
 
-        public CellState cellState { get; set; }
+        public StateTypes cellState { get; set; }
 
+        public string cellColor { get; set; }
         //Add message
         public string message { get { return $"Cell {x_row}, {y_column} met waarde {cellValue} kan niet"; } }
 
@@ -39,10 +40,10 @@ namespace Sudoku_Tim_Thomas.Models
         {
             if (cellValue < 0)
             {
-                cellState = CellState.HELP;
+                cellState = StateTypes.HELPER;
             } else
             {
-                cellState = CellState.START;
+                cellState = StateTypes.INITIAL;
             }
         }
     }

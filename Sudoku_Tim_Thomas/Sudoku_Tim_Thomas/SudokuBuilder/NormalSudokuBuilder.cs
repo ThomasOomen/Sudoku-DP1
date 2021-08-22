@@ -12,14 +12,15 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
     public class NormalSudokuBuilder : ISudokuClonerDefault
     {
         BuildSudokuBoard buildSudokuBoard;
-        public const string SUDOKUTYPE = "Default";
+        public const string SUDOKUTYPE = "NormalSudoku";
         public ISudokuClonerDefault Clone()
         {
             return (NormalSudokuBuilder)MemberwiseClone();
         }
 
         public SudokuBase Build(string file)
-        {   
+        {
+            buildSudokuBoard = new BuildSudokuBoard();
             MainGrid sudokuBoard = buildSudokuBoard.InitializeBoard();
             Dictionary<string, int> gridInfo = buildSudokuBoard.GetGridWidth(file, "normal");
             string fileLines = File.ReadAllLines(file)[0];
@@ -42,11 +43,6 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
             "green",
             "yellow",
             "red",
-            "orange",
-            "cyan",
-            "purple",
-            "pink",
-            "brown"
             };
 
             for (int i = 0; i < gridWidth; i++)
@@ -79,7 +75,7 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
                 }
                 else
                 {
-                    if(gridInfo["boardXRow"] >= rowSize)
+                    if(gridInfo["boardXRow"] >= rowSize -1)
                     {
                         gridInfo["boardXRow"] = -1;
                         gridInfo["boardXRow"]++;
@@ -96,6 +92,8 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
                     gridInfo["sudokuYColumn"], 
                     colors[gridInfo["boardRegNr"]]
                 );
+
+                fields[gridInfo["boardRegNr"]].gridParts.Add(cell);
             }
 
             foreach(Grid grid in fields)

@@ -14,11 +14,10 @@ namespace Sudoku_Tim_Thomas.ViewModel
 
     public class MainViewModel : ViewModelBase
     {
-        //Main SudokuVM
+        private SudokuViewModel _sudoku;
 
-        //
-        private string _stateText;
-        public string StateText { get { return _stateText; } set { _stateText = value; RaisePropertyChanged("StateText"); } }
+        public SudokuViewModel Sudoku { get { return _sudoku; } set { _sudoku = value; RaisePropertyChanged("Sudoku"); } }
+
 
         public ICommand ExecuteHelpers { get; set; }
         public ICommand ExecuteCustomCommand { get; set; }
@@ -31,8 +30,6 @@ namespace Sudoku_Tim_Thomas.ViewModel
         {
             CreateHelpers();
             ExecuteHelpers = new RelayCommand<string>(ExecuteHelper);
-
-            StateText = "Change To Definitive State";
         }
 
         private void ExecuteHelper(string helper)

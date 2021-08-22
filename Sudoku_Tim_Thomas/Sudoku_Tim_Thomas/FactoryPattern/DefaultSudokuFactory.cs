@@ -25,7 +25,6 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
 
         public ISudokuClonerDefault TypeBuilder(string sudokuType)
         {
-            Console.WriteLine(sudokuType);
             ISudokuClonerDefault sudokuClonerDefault = Types[sudokuType];
             return sudokuClonerDefault.Clone();
         }
@@ -36,7 +35,7 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
 
             foreach (Type type in types)
             {
-                if (type.GetInterfaces().Contains(typeof(ISudokuClonerNonDefault)))
+                if (type.GetInterfaces().Contains(typeof(ISudokuClonerDefault)))
                 {
                     FieldInfo fieldInfo = type.GetField("SUDOKUTYPE");
                     if (fieldInfo == null)
@@ -45,7 +44,8 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
                     }
                     else
                     {
-                        SaveType(fieldInfo.GetValue(null).ToString(), (ISudokuClonerDefault)Activator.CreateInstance(type));
+                        SaveType(fieldInfo.GetValue(null).ToString(), 
+                        (ISudokuClonerDefault)Activator.CreateInstance(type));
                     }
                 }
             }
@@ -53,7 +53,9 @@ namespace Sudoku_Tim_Thomas.FactoryPattern
 
         public void SaveType(string type, ISudokuClonerDefault obj)
         {
+            Console.WriteLine("obj: ", obj);
             Types[type] = obj;
+            Console.WriteLine("type: ", Types);
         }
     }
 }
