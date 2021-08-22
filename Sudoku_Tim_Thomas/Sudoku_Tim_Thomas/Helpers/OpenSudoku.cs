@@ -39,41 +39,39 @@ namespace Sudoku_Tim_Thomas.Helpers
                 switch (_fileName)
                 {
                     case string four when _fileName.Contains("4x4"):
-                        InitDefaultSudoku(four, sudoku);
+                        InitDefaultSudoku(four);
                         break;
 
                     case string six when _fileName.Contains("6x6"):
-                        InitDefaultSudoku(six, sudoku);
+                        InitDefaultSudoku(six);
 
                         break;
 
                     case string nine when _fileName.Contains("9x9"):
-                        InitDefaultSudoku(nine, sudoku);
+                        InitDefaultSudoku(nine);
 
                         break;
 
                     case string jigsaw when _fileName.Contains("jigsaw"):
-                        InitNonDefaultSudoku(jigsaw, sudoku);
+                        InitNonDefaultSudoku(jigsaw);
                         break;
 
                     case string samurai when _fileName.Contains("samurai"):
-                        InitNonDefaultSudoku(samurai, sudoku);
+                        InitNonDefaultSudoku(samurai);
                         break;
                 }
             }
         }
 
-        private void InitDefaultSudoku(string sudokuType, SudokuBase sudoku)
+        private void InitDefaultSudoku(string sudokuType)
         {
             DefaultSudokuFactory defaultSudokuFactory = (DefaultSudokuFactory)_mainFactory.TypeBuilder("Default");
             ISudokuClonerDefault sudokuClonerDefault = defaultSudokuFactory.TypeBuilder("Default");
             SudokuBase sudoku1;
             sudoku1 = sudokuClonerDefault.Build(sudokuType);
-
-
         }
 
-        private void InitNonDefaultSudoku(string sudokuType, SudokuBase sudoku)
+        private void InitNonDefaultSudoku(string sudokuType)
         {
             NonDefaultSudokuFactory nonDefaultSudokuFactory = (NonDefaultSudokuFactory)_mainFactory.TypeBuilder("NonDefault");
             ISudokuClonerNonDefault sudokuClonerNonDefault = nonDefaultSudokuFactory.TypeBuilder("NonDefault");
