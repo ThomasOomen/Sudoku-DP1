@@ -12,7 +12,7 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
     public class JigsawSudokuBuilder: ISudokuClonerDefault
     {
         BuildSudokuBoard buildSudokuBoard;
-        public const string SUDOKUTYPE = "normal";
+        public const string SUDOKUTYPE = "NonDefault";
 
         public ISudokuClonerDefault Clone()
         {

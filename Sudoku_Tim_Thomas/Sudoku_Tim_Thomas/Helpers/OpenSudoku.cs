@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
+using Sudoku_Tim_Thomas.FactoryPattern;
 using Sudoku_Tim_Thomas.Models.SudokuTypes;
+using Sudoku_Tim_Thomas.SudokuBuilder;
 using Sudoku_Tim_Thomas.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace Sudoku_Tim_Thomas.Helpers
 {
     class OpenSudoku : IHelperBase
     {
+        private MainFactory _mainFactory;
         private MainViewModel _mainVM;
         string curDirectory;
         OpenFileDialog openFileDialog;
@@ -19,6 +22,7 @@ namespace Sudoku_Tim_Thomas.Helpers
 
         public OpenSudoku(MainViewModel mainVM)
         {
+            _mainFactory = new MainFactory();
             this._mainVM = mainVM;
         }
 
@@ -30,51 +34,51 @@ namespace Sudoku_Tim_Thomas.Helpers
 
             if(openFileDialog.ShowDialog()== true)
             {
-                SudokuBase sudoku;
+                
                 _fileName = openFileDialog.FileName;
                 switch (_fileName)
                 {
                     case string four when _fileName.Contains("4x4"):
-                        //TODO Add default factory
-                        //TODO Add default builder
-                        //TODO give default builder source
+                        InitDefaultSudoku(four, sudoku);
                         break;
 
                     case string six when _fileName.Contains("6x6"):
-                        //TODO Add default factory
-                        //TODO Add default builder
-                        //TODO give default builder source
+                        InitDefaultSudoku(six, sudoku);
+
                         break;
 
                     case string nine when _fileName.Contains("9x9"):
-                        //TODO Add default factory
-                        //TODO Add default builder
-                        //TODO give default builder sources
+                        InitDefaultSudoku(nine, sudoku);
+
                         break;
 
                     case string jigsaw when _fileName.Contains("jigsaw"):
-                        //TODO Add NonDefault factory
-                        //TODO Add NonDefault builder
-                        //TODO give NonDefault builder source
+                        InitNonDefaultSudoku(jigsaw, sudoku);
                         break;
 
                     case string samurai when _fileName.Contains("samurai"):
-                        //TODO Add NonDefault factory
-                        //TODO Add NonDefault builder
-                        //TODO give NonDefault builder source
+                        InitNonDefaultSudoku(samurai, sudoku);
                         break;
                 }
             }
         }
 
-        private void InitDefaultSudoku()
+        private void InitDefaultSudoku(string sudokuType, SudokuBase sudoku)
         {
-            DefaultSudokuFactory defaultSudokuFactory = 
+            DefaultSudokuFactory defaultSudokuFactory = (DefaultSudokuFactory)_mainFactory.TypeBuilder("Default");
+            ISudokuClonerDefault sudokuClonerDefault = defaultSudokuFactory.TypeBuilder("Default");
+            SudokuBase sudoku1;
+            sudoku1 = sudokuClonerDefault.Build(sudokuType);
+
+
         }
 
-        private void InitNonDefaultSudoku()
+        private void InitNonDefaultSudoku(string sudokuType, SudokuBase sudoku)
         {
-
+            NonDefaultSudokuFactory nonDefaultSudokuFactory = (NonDefaultSudokuFactory)_mainFactory.TypeBuilder("NonDefault");
+            ISudokuClonerNonDefault sudokuClonerNonDefault = nonDefaultSudokuFactory.TypeBuilder("NonDefault");
+            SudokuBase sudoku2;
+            sudoku2 = sudokuClonerNonDefault.Build(sudokuType);
         }
     }
 }

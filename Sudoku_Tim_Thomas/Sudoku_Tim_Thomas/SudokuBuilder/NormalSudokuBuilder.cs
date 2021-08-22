@@ -12,8 +12,7 @@ namespace Sudoku_Tim_Thomas.SudokuBuilder
     public class NormalSudokuBuilder : ISudokuClonerDefault
     {
         BuildSudokuBoard buildSudokuBoard;
-        public const string SUDOKUTYPE = "normal";
-        //TODO zie ISudokuCloner Clone todo.
+        public const string SUDOKUTYPE = "Default";
         public ISudokuClonerDefault Clone()
         {
             return (NormalSudokuBuilder)MemberwiseClone();
